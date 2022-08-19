@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1660825136708-1" author="Alexei.Erofeev (generated)">
+        <createSequence incrementBy="1" sequenceName="UUID" startValue="1"/>
+    </changeSet>
+    <changeSet id="1660825136708-2" author="Alexei.Erofeev (generated)">
+        <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
+    </changeSet>
+    <changeSet id="1660825136708-3" author="Alexei.Erofeev (generated)">
+        <createTable tableName="Booking">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_booking"/>
+            </column>
+            <column name="passengerName" type="VARCHAR(255)"/>
+            <column name="passengerContactNumber" type="VARCHAR(255)"/>
+            <column name="pickupTime" type="timestamp with time zone"/>
+            <column name="asap" type="BOOLEAN"/>
+            <column name="waitingTime" type="INT"/>
+            <column name="noOfPassengers" type="INT"/>
+            <column name="price" type="DECIMAL"/>
+            <column name="rating" type="INT"/>
+            <column name="createdOn" type="DATETIME"/>
+            <column name="lastModifiedOn" type="DATETIME"/>
+            <column name="userId" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1660825136708-4" author="Alexei.Erofeev (generated)">
+        <createTable tableName="TripWaypoint">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_tripwaypoint"/>
+            </column>
+            <column name="book_id" type="UUID"/>
+            <column name="lastStop" type="BOOLEAN"/>
+            <column name="locality" type="VARCHAR(255)"/>
+            <column name="lat" type="DOUBLE"/>
+            <column name="lng" type="DOUBLE"/>
+            <column name="tripWayPointTimestamp" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1660825136708-6" author="Alexei.Erofeev (generated)">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="TripWaypoint"
+                                 constraintName="FK_TRIPWAYPOINT_ON_BOOK" referencedColumnNames="id"
+                                 referencedTableName="Booking"/>
+    </changeSet>
+
+</databaseChangeLog>
